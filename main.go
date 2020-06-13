@@ -39,20 +39,20 @@ func main(){
 	var correct int
 	for i, line := range lines {
 		fmt.Printf("Problem #%d: %s = \n", i+1, line[0])
-		answerCh := make(chan string)
 
+		answerCh := make(chan string)
 		go func(){
-			var getAnswer string
-			fmt.Scanf("%s\n", &getAnswer)
-			answerCh <- getAnswer
+			var answer string
+			fmt.Scanf("%s\n", &answer)
+			answerCh <- answer
 		}()
 
 		select {
 		case <- timer.C:
 			fmt.Printf("\nyou scored %d out of %d\n", correct, len(lines))
 			return
-		case getAnswer := <- answerCh:
-			if strings.TrimSpace(getAnswer) == line[1] {
+		case answer := <- answerCh:
+			if strings.TrimSpace(answer) == line[1] {
 				correct++
 			}
 		}
