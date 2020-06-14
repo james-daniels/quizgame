@@ -52,7 +52,7 @@ var correct, i int
 
 		select {
 		case <- timer.C:
-			fmt.Printf("\nyou scored %d out of %d\n", correct, len(lines))
+			fmt.Printf("\nyou scored %d out of %d\n", correct, len(mlines))
 			return
 		case answer := <- answerCh:
 			if strings.TrimSpace(answer) == value {
@@ -61,5 +61,5 @@ var correct, i int
 		}
 		i++
 	}
-	fmt.Printf("you scored %d out of %d\n", correct, len(lines))
+	fmt.Printf("you scored %d out of %d\n", correct, len(mlines))
 }
