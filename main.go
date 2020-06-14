@@ -27,9 +27,7 @@ func main(){
 	}
 	defer file.Close()
 
-	reader := csv.NewReader(file)
-
-	lines, err := reader.ReadAll()
+	lines, err := csv.NewReader(file).ReadAll()
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -38,7 +36,6 @@ func main(){
 	for _, v := range lines {
 		mlines[v[0]] = v[1]
 	}
-
 
 timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
 
