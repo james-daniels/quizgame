@@ -34,11 +34,17 @@ func main(){
 		fmt.Println(err)
 	}
 
-	timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
+	mlines := make(map[string]string)
+	for _, v := range lines {
+		mlines[v[0]] = v[1]
+	}
 
-	var correct int
-	for i, line := range lines {
-		fmt.Printf("Problem #%d: %s = \n", i+1, line[0])
+
+timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
+
+var correct, i int
+	for key, value := range mlines {
+		fmt.Printf("Problem #%d: %s = \n", i+1, key)
 
 		answerCh := make(chan string)
 		go func(){
@@ -52,11 +58,11 @@ func main(){
 			fmt.Printf("\nyou scored %d out of %d\n", correct, len(lines))
 			return
 		case answer := <- answerCh:
-			if strings.TrimSpace(answer) == line[1] {
+			if strings.TrimSpace(answer) == value {
 				correct++
 			}
 		}
+		i++
 	}
-	
 	fmt.Printf("you scored %d out of %d\n", correct, len(lines))
 }
