@@ -38,7 +38,6 @@ func main(){
 		scrambeQuestions(lines)
 		return
 	}
-
 		standardQuestions(lines)
 }
 
